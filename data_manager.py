@@ -1,6 +1,6 @@
 import csv
 
-def ble(file_path: str) -> list:
+def csv_to_list(file_path: str) -> list:
         one_user_story_id = "c"
         user_stories = []
 
@@ -24,4 +24,4 @@ def ble(file_path: str) -> list:
         # return the temporary list
                 return user_stories
 
-print(ble('sample_data/answer.csv'))
+
