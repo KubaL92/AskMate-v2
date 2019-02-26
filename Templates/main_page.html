@@ -11,10 +11,12 @@
     <form action="/add_question">
         <input type="submit" value="Add new question">
     </form>
-    <ol>
-        <li>Pytanie1</li>
-        <li>Pytanie2</li>
-        <li>Pytanie3</li>
-    </ol>
+    <ul>
+    {% for question in user_questions %}
+        <li>{{ question }}</li>
+    {% else %}
+        <p>No posts yet</p>
+    {% endfor %}
+    </ul>
 </body>
 </html>
