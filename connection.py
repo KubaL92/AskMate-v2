@@ -16,7 +16,7 @@ def csv_to_list(file_path: str) -> list:
             a = '\n'
             for key, value in user_story.items():
                 if a in value:
-                    value = value.replace(a, "")
+                    user_story[key] = value.replace(a, "")
 
         #  store modified data in temporary list
             user_stories.append(user_story)
@@ -27,4 +27,4 @@ def csv_to_list(file_path: str) -> list:
     return user_stories_sorted
 
 for i in csv_to_list('sample_data/question.csv'):
-    print(i)
+    print(i['message'])
