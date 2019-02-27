@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Question Page</title>
 </head>
 <body>
-
+  {% for question in user_questions %}
+  <h2>{{ question['title'] }}</h2>
+  {% endfor %}
 </body>
 </html>
