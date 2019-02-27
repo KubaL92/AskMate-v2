@@ -26,5 +26,8 @@ def csv_to_list(file_path: str) -> list:
     # return the temporary list
     return user_stories_sorted
 
-for i in csv_to_list('sample_data/question.csv'):
-    print(i)
+# for i in csv_to_list('sample_data/question.csv'):
+#     print(i)
+
+def display_question(id):
+    return (csv_to_list('sample_data/question.csv')[id])
