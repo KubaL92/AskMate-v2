@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 import connection
 
 app = Flask(__name__,template_folder = 'Templates')
@@ -23,10 +23,10 @@ def route_question_list():
     return render_template('question_page.html', user_questions=user_questions)
 
 
-if __name__ == "__main__":
-    app.run()
-
-@app.route('/question/<id>', methods=['GET', 'POST'])
+@app.route('/question/<int:id>', methods=['GET', 'POST'])
 def route_spec_question(id):
     quest = connection.display_question(id)
     return render_template('question_page.html', quest=quest)
+
+if __name__ == "__main__":
+    app.run()
