@@ -13,7 +13,8 @@
     </form>
     <ul>
     {% for question in user_questions %}
-        <li>{{ question }}</li>
+        <!--<li><a href="/question/<id>">{{ question['id'] }} {{ question['title'] }}</a></li>-->
+        <li><a href={{ url_for("id") }}>{{ question['id'] }} {{ question['title'] }}</a></li>
     {% else %}
         <p>No posts yet</p>
     {% endfor %}
