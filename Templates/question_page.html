@@ -5,8 +5,7 @@
     <title>Question Page</title>
 </head>
 <body>
-  {% for question in user_questions %}
-  <h2>{{ question['title'] }}</h2>
-  {% endfor %}
+  <h1>{{ quest['title'] }}</h1>
+  <textarea rows="6" cols="60" disabled>{{ quest['message'] }}</textarea>
 </body>
 </html>
