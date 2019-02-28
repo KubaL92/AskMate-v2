@@ -14,7 +14,7 @@
     <ul>
     {% for question in user_questions %}
         <!--<li><a href="/question/<id>">{{ question['id'] }} {{ question['title'] }}</a></li>-->
-        <li><a href="{{ url_for('route_spec_question', id=1) }}">{{ question['id'] }} {{ question['title'] }}</a></li>
+        <li>{{ question['id'] }}<a href="{{ url_for('route_spec_question', id=question['id']) }}">{{ question['title'] }}</a></li>
     {% else %}
         <p>No posts yet</p>
     {% endfor %}
