@@ -33,16 +33,21 @@ def dodaj_pytanie_do_pliku():
     question_title = request.form['title']
     question_message = request.form['question']
     cały_text = question_message + '' + question_title
-    return redirect
+    return redirect("/")
 
 
 
 
-# @app.route('/question/<int:id>', methods=['GET', 'POST'])
-# def route_new_question():
-#     generated_id = data_manager.generate_question_id()
-#     return render_template('question_page.html', generated_id=generated_id)
+@app.route("/question/<question_id>/new-answer", methods=['GET', 'POST'])
+def add_new_answer(question_id):
+
+    question = connection.display_question('sample_data/question.csv', question_id)
+    answers = data_manager.give_specific_answers(question_id, connection.csv_to_list('sample_data/answer.csv'))
+    generated_id = data_manager.generate_question_id()
+
+    return render_template('question_page.html', )
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True,
+            port=5010)
