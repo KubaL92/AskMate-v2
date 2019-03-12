@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>New Question</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block title %}New Question{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
   <h1>Add new question</h1>
   <form action="question" method="POST">
     <label for="title">Question Title</label>
@@ -18,5 +17,5 @@
   </form>
   <br>
   <a href="/"><button type="button">Main Page</button></a>
-</body>
-</html>
+{% endblock %}
+
