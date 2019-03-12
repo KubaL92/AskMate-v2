@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Ask Mate</title>
-</head>
-<body>
-    <h1>
-        ASK MATE V1
-    </h1>
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <h1>ASK MATE V1</h1>
     <form action="/add_question">
         <input type="submit" value="Add new question">
     </form>
@@ -18,5 +15,4 @@
         <p>No posts yet</p>
     {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
