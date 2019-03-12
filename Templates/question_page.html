@@ -6,6 +6,15 @@
 </head>
 <body>
   <h1>{{ quest['title'] }}</h1>
-  <textarea rows="6" cols="60" disabled>{{ quest['message'] }}</textarea>
+  <form>
+    <textarea rows="6" cols="60" disabled>{{ quest['message'] }}</textarea>
+    <footer>seen by: {{ quest['view_number'] }} upvoted: {{ quest['vote_number'] }} </footer>
+  </form>
+  <form>
+    {% for answer in answers %}
+      <p>{{ answer['message'] }}</p>
+      <footer>upvoted: {{ answer['vote_number'] }} </footer>
+    {% endfor %}
+  </form>
 </body>
 </html>

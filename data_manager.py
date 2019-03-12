@@ -6,4 +6,12 @@ def get_titles(user_stories: list) -> list:
         list_of_titles.append(i['title'])
     return list_of_titles
 
-#print(get_titles(connection.csv_to_list('sample_data/question.csv')))
+def generate_question_id(file_path='sample_data/question.csv'):
+    question_list = connection.csv_to_list(file_path)
+    id_ = 0
+    for question in question_list:
+        id_ = int(question['id'])
+    id_gen = id_ + 1
+    return str(id_gen)
+
+

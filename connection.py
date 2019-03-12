@@ -1,5 +1,6 @@
 import csv
 
+
 def csv_to_list(file_path: str) -> list:
     user_stories = []
 
@@ -21,7 +22,9 @@ def csv_to_list(file_path: str) -> list:
         #  store modified data in temporary list
             user_stories.append(user_story)
 
-    user_stories_sorted = sorted(user_stories, key = lambda x: x['submission_time'], reverse=True)
+    user_stories_sorted = sorted(user_stories,
+                                 key = lambda x: x['submission_time'],
+                                 reverse=True)
 
     # return the temporary list
     return user_stories_sorted
@@ -29,5 +32,10 @@ def csv_to_list(file_path: str) -> list:
 # for i in csv_to_list('sample_data/question.csv'):
 #     print(i)
 
-def display_question(id):
-    return (csv_to_list('sample_data/question.csv')[id])
+
+def display_question(file_path, id):
+    return csv_to_list(file_path)[id]
+
+
+# print(display_question('sample_data/answer.csv',0))
+print(csv_to_list('sample_data/answer.csv'))
