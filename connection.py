@@ -1,5 +1,6 @@
 import csv
 
+
 def csv_to_list(file_path: str) -> list:
     list_of_data = []
     with open(file_path) as csvfile:
