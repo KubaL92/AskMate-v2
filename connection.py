@@ -36,6 +36,3 @@ def csv_to_list(file_path: str) -> list:
 def display_question(file_path, id):
     return csv_to_list(file_path)[id]
 
-
-# print(display_question('sample_data/answer.csv',0))
-# print(csv_to_list('sample_data/answer.csv'))
