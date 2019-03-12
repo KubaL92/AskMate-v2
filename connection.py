@@ -49,14 +49,14 @@ def update_answer(data):
 
 
 
-def add_data_to_file(data, append=True, type):
-    if type == 'question':
-        data_header = ['id', 'submission_time', 'view_number', 'vote_number', 'title,message' ,'images']
-        file_path = 'sample_data/question.csv'
-    else:
-        data_header = ['id', 'submission_time', 'vote_number' ,'question_id', 'message' ,'image']
-        file_path = 'sample_data/answers.csv'
-    existing_data = list_of_data_sorted()
+def add_data_to_file(data, type, append=True):
+        if type == 'question':
+            data_header = ['id', 'submission_time', 'view_number', 'vote_number', 'title,message' ,'images']
+            file_path = 'sample_data/question.csv'
+        elif type == 'answer':
+            data_header = ['id', 'submission_time', 'vote_number' ,'question_id', 'message' ,'image']
+            file_path = 'sample_data/answers.csv'
+    existing_data = csv_to_list(file_path)
 
     with open(file_path, 'w') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=data_header)
