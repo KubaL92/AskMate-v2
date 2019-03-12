@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, url_for, redirect
 import connection, data_manager
 
 app = Flask(__name__, template_folder='Templates')
