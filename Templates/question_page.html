@@ -5,10 +5,10 @@
     <title>Question Page</title>
 </head>
 <body>
-  <h1>{{ quest['title'] }}</h1>
+  <h1>{{ question['title'] }}</h1>
   <form>
-    <textarea rows="6" cols="60" disabled>{{ quest['message'] }}</textarea>
-    <footer>seen by: {{ quest['view_number'] }} upvoted: {{ quest['vote_number'] }} </footer>
+    <textarea rows="6" cols="60" disabled>{{ question['message'] }}</textarea>
+    <footer>seen by: {{ question['view_number'] }} upvoted: {{ question['vote_number'] }} </footer>
   </form>
   <form>
     {% for answer in answers %}

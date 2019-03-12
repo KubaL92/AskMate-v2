@@ -14,4 +14,9 @@ def generate_question_id(file_path='sample_data/question.csv'):
     id_gen = id_ + 1
     return str(id_gen)
 
-
+def give_specific_answers(id, list_of_all_answers):
+    list_of_answers=[]
+    for answer in list_of_all_answers:
+        if answer['question_id']==str(id):
+            list_of_answers.append(answer)
+    return list_of_answers

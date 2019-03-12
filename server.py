@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, url_for, redirect
 import connection, data_manager
 
 app = Flask(__name__, template_folder='Templates')
@@ -18,12 +18,12 @@ def route_add_question():
 
 @app.route('/question/<int:id>', methods=['GET', 'POST'])
 def route_spec_question(id):
-    quest = connection.display_question('sample_data/question.csv', id)
-    answers = connection.csv_to_list('sample_data/answer.csv')
+    question = connection.display_question('sample_data/question.csv', id)
+    answers = data_manager.give_specific_answers(id, connection.csv_to_list('sample_data/answer.csv'))
     generated_id = data_manager.generate_question_id()
     # answers = connection.display_question('sample_data/answer.csv', id)
     return render_template('question_page.html',
-                           quest=quest,
+                           question=question,
                            answers=answers,
                            generated_id=generated_id)
 
