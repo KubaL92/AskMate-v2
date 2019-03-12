@@ -18,7 +18,6 @@ def csv_to_list(file_path: str) -> list:
                                  reverse=True)
     return list_of_data_sorted
 
-print(csv_to_list('sample_data/question.csv'))
 
 def generate_new_id(file_path):
     data_list = csv_to_list(file_path)

@@ -11,7 +11,7 @@
   </form>
   <form>
     {% for answer in answers %}
-      <p>{{ answer['message'] }}</p>
+      <p><strong><em>{{ answer['message'] }}</strong></em></p>
       <footer>upvoted: {{ answer['vote_number'] }} </footer>
     {% endfor %}
   </form>
