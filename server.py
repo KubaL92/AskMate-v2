@@ -36,7 +36,15 @@ def dodaj_pytanie_do_pliku():
     return redirect
 
 
-
+@app.route('/question/<int:id>/new-answer', methods=['POST'])
+def add_new_answer():
+    question = connection.display_question('sample_data/question.csv', id)
+    answers = data_manager.give_specific_answers(id, connection.csv_to_list('sample_data/answer.csv'))
+    generated_id = data_manager.generate_question_id('sample_data/answer.csv')
+    #TODO -> przechwytywanie tekstu z inputu, zapisywanie do pliku 'answers'
+    return render_template('question_page.html',
+                           question=question,
+                           answers=answers)
 
 # @app.route('/question/<int:id>', methods=['GET', 'POST'])
 # def route_new_question():
