@@ -1,41 +1,67 @@
 import csv
 
-
 def csv_to_list(file_path: str) -> list:
-    user_stories = []
-
-    #  open csv file to read
+    list_of_data = []
     with open(file_path) as csvfile:
-        #  use DictReader to directly create dictionaries from each lines in the csv file
-        # csvfile = csvfile.replace('\n','')
         reader = csv.DictReader(csvfile)
-
-        #  read all lines in csv file
         for row in reader:
-            #  make a copy of the read row, since we can't modify it
-            user_story = dict(row)
+            data = dict(row)
             a = '\n'
-            for key, value in user_story.items():
+            for key, value in data.items():
                 if a in value:
                     value = value.replace(a, "")
+            list_of_data.append(data)
 
-        #  store modified data in temporary list
-            user_stories.append(user_story)
-
-    user_stories_sorted = sorted(user_stories,
+    list_of_data_sorted = sorted(list_of_data,
                                  key = lambda x: x['submission_time'],
                                  reverse=True)
+    return list_of_data_sorted
 
-    # return the temporary list
-    return user_stories_sorted
+print(csv_to_list('sample_data/question.csv'))
 
-# for i in csv_to_list('sample_data/question.csv'):
-#     print(i)
+def generate_new_id(file_path):
+    data_list = csv_to_list(file_path)
+    id_ = 0
+    for data in data_list:
+        id_ = int(data['id'])
+    id_gen = id_ + 1
+    return str(id_gen)
 
 
-def display_question(file_path, id):
-    return csv_to_list(file_path)[id]
+def add_question(data):
+    data['id'] = generate_new_id()
+    add_data_to_file(data, 'question', True)
 
 
-# print(display_question('sample_data/answer.csv',0))
-#print(csv_to_list('sample_data/answer.csv'))
+def add_answer(data):
+    data['id'] = generate_new_id()
+    add_data_to_file(data, 'answer', True)
+
+
+def update_question(data):
+    add_data_to_file(data, 'question', False)
+
+
+def update_answer(data):
+    add_data_to_file(data, 'answer', False)
+
+
+def add_data_to_file(data, type_, append=True):
+    if type_ == 'question':
+        data_header = ['id', 'submission_time', 'view_number', 'vote_number', 'title,message' ,'images']
+        file_path = 'sample_data/question.csv'
+    else:
+        data_header = ['id', 'submission_time', 'vote_number' ,'question_id', 'message' ,'image']
+        file_path = 'sample_data/answers.csv'
+    existing_data = csv_to_list()
+
+    with open(file_path, 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=data_header)
+        writer.writeheader()
+        for row in existing_data:
+            if not append:
+                if row['id'] == data['id']:
+                    row = data
+            writer.writerow(row)
+        if append:
+            writer.writerow(data)
