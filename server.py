@@ -52,6 +52,17 @@ def add_new_answer(id_):
                            answers=answers)
 
 
+# /list?order_by=title &order_direction=desc
+@app.route("/list", methods=['GET', 'POST'])
+def order_question():
+
+    user_questions = connection.csv_to_list('sample_data/question.csv')
+    order_by = request.args.get('order_by')
+    order_direction = request.args.get('order_direction')
+
+
+    return render_template("question_page.html", )
+
 
 
 if __name__ == "__main__":
