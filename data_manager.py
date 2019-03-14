@@ -1,3 +1,5 @@
+from flask import request
+import time
 import connection
 
 
@@ -17,9 +19,50 @@ def generate_question_id(file_path='sample_data/question.csv'):
     return str(id_gen)
 
 
-def give_specific_answers(i_d, list_of_all_answers):
-    list_of_answers=[]
+def give_specific_answers(id, list_of_all_answers):
+    list_of_answers = []
     for answer in list_of_all_answers:
-        if int(answer['question_id']) == i_d:
+        if answer['question_id'] == str(id):
             list_of_answers.append(answer)
     return list_of_answers
+
+#
+# def get_data_to_dict():
+#     if request.method == 'POST':
+#         title = request.form['title']
+#         question = request.form['message']
+#         id = generate_new_id('sample_data/question.csv')
+#         view_number = 0
+#         vote_number = 0
+#         image = ""
+#         submission_time = int(time.time())
+#         my_dict = {"id": id,
+#                    'submission_time': submission_time,
+#                    "title": title,
+#                    "question": question,
+#                    'view_number': view_number,
+#                    'vote_number': vote_number,
+#                    'image': image}
+#         return my_dict
+
+
+def get_data_to_dict():
+    if request.method == 'POST':
+        title = request.form['title']
+        question = request.form['question']
+        id_ = generate_question_id('sample_data/question.csv')
+        view_number = 0
+        vote_number = 0
+        image = ""
+        submission_time = int(time.time())
+        my_dict = {"id": id_,
+                   "title": title,
+                   "message": question,
+                   "view_number" : view_number,
+                   "vote_number" : vote_number,
+                   "submission_time" : submission_time,
+                   "image" : image}
+
+        return my_dict
+
+
