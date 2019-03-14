@@ -34,6 +34,19 @@ def dodaj_pytanie_do_pliku():
     return redirect(url_for('route_spec_question', id=new_question['id']))
 
 
+@app.route('/question/<id_>', methods=['POST'])
+def add_new_answer(id_):
+    id_ = int(id_)
+    question = connection.display_question('sample_data/question.csv', id_)
+    answers = data_manager.give_specific_answers(id_, connection.csv_to_list('sample_data/answer.csv'))
+    generated_id = data_manager.generate_question_id('sample_data/answer.csv')
+    answer_text = request.form["new_answer"]
+    #TODO ->  zapisywanie do pliku 'answers'
+
+    print(answer_text)
+
+    return redirect(url_for('route_spec_question', id=question['id']))
+
 
 if __name__ == "__main__":
     app.run(debug=True)
