@@ -6,9 +6,9 @@ app = Flask(__name__, template_folder='Templates')
 
 @app.route('/')
 def route_index():
-    user_questions = connection.csv_to_list('sample_data/question.csv')
+    return redirect('/list')
 
-    return render_template('main_page.html', user_questions=user_questions)
+
 
 
 @app.route('/add_question')
@@ -52,17 +52,25 @@ def add_new_answer(id_):
                            answers=answers)
 
 
-# /list?order_by=title &order_direction=desc
-@app.route("/list", methods=['GET', 'POST'])
+# /list?order_by=title & order_direction=desc
+@app.route("/list", methods=['GET'])
 def order_question():
 
     user_questions = connection.csv_to_list('sample_data/question.csv')
+
     order_by = request.args.get('order_by')
     order_direction = request.args.get('order_direction')
+    if order_by in ["id", "submission_time", "view_number", "vote_number", "title", "message", "image"]:
+        if order_direction == "asc":
+            user_questions = sorted(user_questions, key=lambda dict_: dict_[order_by])
+        else:
+            user_questions = sorted(
+                user_questions,
+                key=lambda dict_: dict_[order_by],
+                reverse=True)
 
-
-    return render_template("question_page.html", )
-
+        return render_template('main_page.html', user_questions=user_questions)
+    return render_template('main_page.html', user_questions=user_questions)
 
 
 if __name__ == "__main__":
