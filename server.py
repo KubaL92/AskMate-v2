@@ -19,7 +19,7 @@ def route_add_question():
 @app.route('/question/<int:id>', methods=['GET', 'POST'])
 def route_spec_question(id):
     question = connection.display_question('sample_data/question.csv', id)
-    answers = data_manager.give_specific_answers('sample_data/answer.csv')
+    answers = data_manager.give_specific_answers(id, 'sample_data/answer.csv')
     generated_id = data_manager.generate_question_id()
     return render_template('question_page.html',
                            question=question,
