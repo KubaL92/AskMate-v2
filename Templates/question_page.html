@@ -4,14 +4,18 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
+
+
   <h1>{{ question['title'] }}</h1>
-  <form>
+  <form action="/question/{{ question['id'] }}/new-answer" method="Post">
     <textarea rows="6" cols="60" disabled>{{ question['message'] }}</textarea>
     <footer>seen by: {{ question['view_number'] }} upvoted: {{ question['vote_number'] }} </footer>
-    <textarea id="new_answer" name="new_answer" rows="15" cols="50" placeholder="Type in your answer" required></textarea>
+    <textarea id="new_answer" name="new_answer" rows="15" cols="50" placeholder="Type in your answer" required>Numer pytania {{ question['id'] }}</textarea>
     <input type="submit" value="Add answer">
       <br>
   </form>
+
+
   <form>
     <h2>Answers:</h2>
     {% for answer in answers %}

@@ -33,24 +33,27 @@ def dodaj_pytanie_do_pliku():
     question_title = request.form['title']
     question_message = request.form['question']
     cały_text = question_message + '' + question_title
-    return redirect
+    return redirect("/")
 
 
-@app.route('/question/<int:id>/new-answer', methods=['POST'])
-def add_new_answer():
-    question = connection.display_question('sample_data/question.csv', id)
-    answers = data_manager.give_specific_answers(id, connection.csv_to_list('sample_data/answer.csv'))
+@app.route('/question/<id_>/new-answer', methods=['POST'])
+def add_new_answer(id_):
+    id_ = int(id_)
+    question = connection.display_question('sample_data/question.csv', id_)
+    answers = data_manager.give_specific_answers(id_, connection.csv_to_list('sample_data/answer.csv'))
     generated_id = data_manager.generate_question_id('sample_data/answer.csv')
-    #TODO -> przechwytywanie tekstu z inputu, zapisywanie do pliku 'answers'
+    answer_text = request.form["new_answer"]
+    #TODO ->  zapisywanie do pliku 'answers'
+
+    print(answer_text)
+
     return render_template('question_page.html',
                            question=question,
                            answers=answers)
 
-# @app.route('/question/<int:id>', methods=['GET', 'POST'])
-# def route_new_question():
-#     generated_id = data_manager.generate_question_id()
-#     return render_template('question_page.html', generated_id=generated_id)
+
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True,
+            port=5010)

@@ -14,9 +14,12 @@ def csv_to_list(file_path: str) -> list:
             list_of_data.append(data)
 
     list_of_data_sorted = sorted(list_of_data,
-                                 key = lambda x: x['submission_time'],
+                                 key=lambda x: x['submission_time'],
                                  reverse=True)
     return list_of_data_sorted
+
+
+print(csv_to_list('sample_data/question.csv'))
 
 
 def generate_new_id(file_path):
@@ -26,6 +29,10 @@ def generate_new_id(file_path):
         id_ = int(data['id'])
     id_gen = id_ + 1
     return str(id_gen)
+
+
+def display_question(file_path, id_):
+    return csv_to_list(file_path)[id_]
 
 
 def add_question(data):
@@ -48,10 +55,10 @@ def update_answer(data):
 
 def add_data_to_file(data, type_, append=True):
     if type_ == 'question':
-        data_header = ['id', 'submission_time', 'view_number', 'vote_number', 'title,message' ,'images']
+        data_header = ['id', 'submission_time', 'view_number', 'vote_number', 'title,message', 'images']
         file_path = 'sample_data/question.csv'
     else:
-        data_header = ['id', 'submission_time', 'vote_number' ,'question_id', 'message' ,'image']
+        data_header = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
         file_path = 'sample_data/answers.csv'
     existing_data = csv_to_list()
 
