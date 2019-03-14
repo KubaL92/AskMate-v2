@@ -27,6 +27,14 @@ def give_specific_answers(id, list_of_all_answers):
             list_of_answers.append(answer)
     return list_of_answers
 
+# def give_specific_answers():
+#     list_of_all_answers = connection.csv_to_list('sample_data/answer.csv')
+#     list_of_answers = []
+#     for answer in list_of_all_answers:
+#         if answer['question_id'] ==
+
+
+
 #
 # def get_data_to_dict():
 #     if request.method == 'POST':
