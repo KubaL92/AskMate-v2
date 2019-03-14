@@ -1,21 +1,26 @@
 {% extends "layout.html" %}
 {% block title %}Question Page{% endblock %}
 {% block head %}
-    {{ super() }}
+{{ super() }}
 {% endblock %}
 {% block content %}
-  <h1>{{ question['title'] }}</h1>
-  <form>
-    <textarea rows="6" cols="60" disabled>{{ question['message'] }}</textarea>
-    <footer>seen by: {{ question['view_number'] }} upvoted: {{ question['vote_number'] }} </footer>
-  </form>
-  <form>
-    {% for answer in answers %}
-      <p>{{ answer['message'] }}</p>
-      <footer>upvoted: {{ answer['vote_number'] }} </footer>
-    {% endfor %}
-  </form>
-  <br>
-  <a href="/"><button type="button">Main Page</button></a>
-{% endblock %}
 
+
+<h1>{{ question['title'] }}</h1>
+  <textarea rows="6" cols="60" disabled>{{ question['message'] }}</textarea>
+  <footer>seen by: {{ question['view_number'] }} upvoted: {{ question['vote_number'] }} </footer>
+<form action="{{ url_for ('route_spec_question', id = question['id']) }}" method="Post">
+  <textarea id="new_answer" name="new_answer" rows="15" cols="50" placeholder="Type in your answer" required></textarea>
+  <input type="submit" value="Add answer">
+  <br>
+</form>
+
+
+<form>
+  <h2>Answers:</h2>
+  {% for answer in answers %}
+  <p><strong><em>{{ answer['message'] }}</strong></em></p>
+  <footer>upvoted: {{ answer['vote_number'] }} </footer>
+  {% endfor %}
+</form>
+{% endblock %}

@@ -16,6 +16,12 @@ def route_add_question():
     return render_template('add_question.html')
 
 
+@app.route('/question', methods=['POST'])
+def dodaj_pytanie_do_pliku():
+    new_question = data_manager.get_data_to_dict()
+    connection.add_data_to_file()
+    return redirect(url_for('route_spec_question', id=new_question['id']))
+
 @app.route('/question/<int:id>', methods=['GET', 'POST'])
 def route_spec_question(id):
     question = connection.display_question('sample_data/question.csv', id)
@@ -26,12 +32,13 @@ def route_spec_question(id):
                            answers=answers,
                            generated_id=generated_id)
 
+@app.route('/add_answer', methods=['POST'])
+def dodaj_odp_do_pliku():
+    new_answer = data_manager.get_answer_to_dict()
+    connection.add_answer_to_file()
+    return redirect(url_for('route_spec_question', id=new_answer['question_id']))
 
-@app.route('/question', methods=['POST'])
-def dodaj_pytanie_do_pliku():
-    new_question = data_manager.get_data_to_dict()
-    connection.add_data_to_file()
-    return redirect(url_for('route_spec_question', id=new_question['id']))
+
 
 
 
