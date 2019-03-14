@@ -1,7 +1,8 @@
 import csv
-import data_manager
 
-def csv_to_list(file_path: object) -> object:
+
+
+def csv_to_list(file_path):
     user_stories = []
 
     #  open csv file to read

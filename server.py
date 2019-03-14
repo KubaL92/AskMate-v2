@@ -19,20 +19,12 @@ def route_add_question():
 @app.route('/question/<int:id>', methods=['GET', 'POST'])
 def route_spec_question(id):
     question = connection.display_question('sample_data/question.csv', id)
-    answers = data_manager.give_specific_answers('sample_data/answer.csv')
+    answers = data_manager.give_specific_answers(id, 'sample_data/answer.csv')
     generated_id = data_manager.generate_question_id()
     return render_template('question_page.html',
                            question=question,
                            answers=answers,
                            generated_id=generated_id)
-
-
-# @app.route('/question', methods=['POST'])
-# def dodaj_pytanie_do_pliku():
-#     new_question = data_manager.get_data_to_dict()
-#
-#     return redirect
-#
 
 
 @app.route('/question', methods=['POST'])
@@ -41,10 +33,6 @@ def dodaj_pytanie_do_pliku():
     connection.add_data_to_file()
     return redirect(url_for('route_spec_question', id=new_question['id']))
 
-# @app.route('/question/<int:id>', methods=['GET', 'POST'])
-# def route_new_question():
-#     generated_id = data_manager.generate_question_id()
-#     return render_template('question_page.html', generated_id=generated_id)
 
 
 if __name__ == "__main__":
