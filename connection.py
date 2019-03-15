@@ -54,8 +54,8 @@ def add_data_to_file():
         writer.writeheader()
         writer.writerows(existing_data)
 
-def add_answer_to_file():
-    dictio = data_manager.get_answer_to_dict()
+def add_answer_to_file(new_answer):
+    dictio = new_answer
     data_header = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
     file_path = 'sample_data/answer.csv'
     existing_data = csv_to_list('sample_data/answer.csv')

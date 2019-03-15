@@ -33,9 +33,9 @@ def route_spec_question(id):
                            answers=answers,
                            generated_id=generated_id)
 
-@app.route('/add_answer')
-def ans_site():
-    return render_template('add_answer.html')
+@app.route('/add_answer/<id>')
+def ans_site(id):
+    return render_template('add_answer.html', id=id)
 
 @app.route('/delete_question')
 def delete_question_site():
@@ -55,12 +55,11 @@ def add_new_answer(id_):
     answer_text = request.form["new_answer"]
     #TODO ->  zapisywanie do pliku 'answers'
 
-@app.route('/add_answer', methods=['POST'])
-def dodaj_odp_do_pliku():
-    id1 = request.args['id']
-    new_answer = data_manager.get_answer_to_dict(id1)
-    connection.add_answer_to_file()
-    return redirect(url_for('route_spec_question', id=new_answer['question_id']))
+@app.route('/add_answer/<id>', methods=['POST'])
+def dodaj_odp_do_pliku(id):
+    new_answer = data_manager.get_answer_to_dict(id)
+    connection.add_answer_to_file(new_answer)
+    return redirect('/question/%s' % id)
 
 @app.route("/list", methods=['GET'])
 def order_question():
