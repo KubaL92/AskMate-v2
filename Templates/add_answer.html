@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}Answer{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+<style>
+  body {
+    height: 1000px;
+    background-color: lightblue;
+    background-image: linear-gradient(lightblue, white);
+  }
+  h1 {
+    color: black;
+    text-align: center;
+    font-style: black
+  }
+</style>
+  <h1>Add new answer</h1>
+  <form action="add_answer" method="POST">
+    <label for="new_answer"></label>
+    <br>
+    <textarea id="new_answer" name="new_answer" rows="15" cols="100" placeholder="Your answer here" required></textarea>
+    <br>
+    <input type="submit" value="Send">
+  </form>
+  <br>
+  <a href="/"><button type="button">Main Page</button></a>
+{% endblock %}

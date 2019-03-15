@@ -49,14 +49,14 @@ def get_data_to_dict():
         return my_dict
 
 
-def get_answer_to_dict():
+def get_answer_to_dict(lol):
     if request.method == 'POST':
         id_= generate_question_id('sample_data/answer.csv')
         submission_time = int(time.time())
         vote_number = 0
         message = request.form['new_answer']
         image = ""
-        question_id = request.args['id']
+        question_id = lol
         answer_dict = {"id": id_,
                        "message" : message,
                        "submission_time" : submission_time,
