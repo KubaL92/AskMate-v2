@@ -21,7 +21,7 @@
     <footer>seen by: {{ question['view_number'] }} upvoted: {{ question['vote_number'] }} </footer>
   </form>
   <br>
-  <a href="/add_answer"><button type="button">Add answer</button></a>
+  <a href="/add_answer/{{question['id']}}"><button type="button">Add answer</button></a>
   <a href="/delete_question"><button type="button">Delete question</button></a>
 
   <form>
