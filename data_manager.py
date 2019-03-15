@@ -2,6 +2,23 @@ from flask import request
 import time
 import connection
 
+def change_to_string(something):
+    return str(something)
+
+def change_to_integer_and_add_1(something_else):
+    return int(something_else)+1
+
+def update_view_number_in_specific_question(file_path, id):
+    all_with_number_unchanged = connection.csv_to_list(file_path)
+    updated = []
+    for line in all_with_number_unchanged:
+        if line['id']==str(id):
+            line['view_number'] = change_to_integer_and_add_1(line['vote_number'])
+            line['view_number'] = change_to_string(line['view_number'])
+            updated.append(line)
+        else:
+            updated.append(line)
+    return updated
 
 def get_titles(user_stories: list) -> list:
     list_of_titles = []

@@ -38,6 +38,14 @@ def display_question(file_path, id):
     return csv_to_list(file_path)[id]
 
 
+def save_updated_view_number(file_path, id):
+    data_header = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
+    list_of_dicts = data_manager.update_view_number_in_specific_question(file_path, id)
+    with open(file_path, 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=data_header)
+        writer.writeheader()
+        writer.writerows(list_of_dicts)
+
 def add_data_to_file():
     dictio = data_manager.get_data_to_dict()
     data_header = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
@@ -49,8 +57,8 @@ def add_data_to_file():
         writer.writeheader()
         writer.writerows(existing_data)
 
-def add_answer_to_file(new_answer):
-    dictio = new_answer
+def add_answer_to_file():
+    dictio = data_manager.get_answer_to_dict()
     data_header = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
     file_path = 'sample_data/answer.csv'
     existing_data = csv_to_list('sample_data/answer.csv')

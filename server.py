@@ -24,8 +24,9 @@ def dodaj_pytanie_do_pliku():
 
 @app.route('/question/<int:id>', methods=['GET', 'POST'])
 def route_spec_question(id):
+    connection.save_updated_view_number('sample_data/question.csv', id)
     question = connection.display_question('sample_data/question.csv', id)
-    answers = data_manager.give_specific_answers(id, 'sample_data/answer.csv')
+    answers = data_manager.give_specific_answers(id, connection.csv_to_list('sample_data/answer.csv'))
     generated_id = data_manager.generate_question_id()
     return render_template('question_page.html',
                            question=question,
@@ -45,6 +46,14 @@ def delete_question_site():
 
 
 
+@app.route('/question/<id_>/new-answer', methods=['POST'])
+def add_new_answer(id_):
+    id_ = int(id_)
+    question = connection.display_question('sample_data/question.csv', id_)
+    answers = data_manager.give_specific_answers(id_, connection.csv_to_list('sample_data/answer.csv'))
+    generated_id = data_manager.generate_question_id('sample_data/answer.csv')
+    answer_text = request.form["new_answer"]
+    #TODO ->  zapisywanie do pliku 'answers'
 
 @app.route('/add_answer/<id>', methods=['POST'])
 def dodaj_odp_do_pliku(id):
@@ -54,7 +63,6 @@ def dodaj_odp_do_pliku(id):
 
 @app.route("/list", methods=['GET'])
 def order_question():
-
     user_questions = connection.csv_to_list('sample_data/question.csv')
 
     order_by = request.args.get('order_by')
