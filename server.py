@@ -16,6 +16,12 @@ def route_add_question():
     return render_template('add_question.html')
 
 
+@app.route('/question', methods=['POST'])
+def dodaj_pytanie_do_pliku():
+    new_question = data_manager.get_data_to_dict()
+    connection.add_data_to_file()
+    return redirect(url_for('route_spec_question', id=new_question['id']))
+
 @app.route('/question/<int:id>', methods=['GET', 'POST'])
 def route_spec_question(id):
     question = connection.display_question('sample_data/question.csv', id)
@@ -26,13 +32,45 @@ def route_spec_question(id):
                            answers=answers,
                            generated_id=generated_id)
 
+@app.route('/add_answer')
+def ans_site():
+    return render_template('add_answer.html')
 
-@app.route('/question', methods=['POST'])
-def dodaj_pytanie_do_pliku():
-    new_question = data_manager.get_data_to_dict()
-    connection.add_data_to_file()
-    return redirect(url_for('route_spec_question', id=new_question['id']))
+@app.route('/delete_question')
+def delete_question_site():
+    return render_template('delete_question.html')
 
+# @app.route('/delete_question', methods=['POST'])
+#     def delete_question(id):
+
+
+
+
+@app.route('/add_answer', methods=['POST'])
+def dodaj_odp_do_pliku():
+    id1 = request.args['id']
+    new_answer = data_manager.get_answer_to_dict(id1)
+    connection.add_answer_to_file()
+    return redirect(url_for('route_spec_question', id=new_answer['question_id']))
+
+@app.route("/list", methods=['GET'])
+def order_question():
+
+    user_questions = connection.csv_to_list('sample_data/question.csv')
+
+    order_by = request.args.get('order_by')
+    order_direction = request.args.get('order_direction')
+    if order_by in ["id", "submission_time", "view_number", "vote_number", "title", "message", "image"]:
+        if order_direction == "asc":
+            user_questions = sorted(user_questions, key=lambda dict_: dict_[order_by])
+        else:
+            user_questions = sorted(
+                user_questions,
+                key=lambda dict_: dict_[order_by],
+                reverse=True)
+
+        return render_template('main_page.html', user_questions=user_questions)
+    return render_template('main_page.html', user_questions=user_questions)
 
 @app.route('/question/<id_>', methods=['POST'])
 def add_new_answer(id_):
