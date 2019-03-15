@@ -101,4 +101,5 @@ ENV/
 .mypy_cache/
 
 # pycharm files
-.idea/
+.idea/:sample_data
+:test.py

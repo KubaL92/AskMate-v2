@@ -1,9 +1,7 @@
 import csv
 import data_manager
 
-
-
-def csv_to_list(file_path):
+def csv_to_list(file_path: object) -> object:
     user_stories = []
 
     #  open csv file to read
@@ -37,6 +35,13 @@ def csv_to_list(file_path):
 def display_question(file_path, id):
     return csv_to_list(file_path)[id]
 
+
+def save_updated_view_number(file_path, list_of_dicts):
+    data_header = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
+    with open(file_path, 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=data_header)
+        writer.writeheader()
+        writer.writerows(list_of_dicts)
 
 def add_data_to_file():
     dictio = data_manager.get_data_to_dict()
