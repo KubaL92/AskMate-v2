@@ -1,7 +1,9 @@
 import csv
 import data_manager
 
-def csv_to_list(file_path: object) -> object:
+
+
+def csv_to_list(file_path):
     user_stories = []
 
     #  open csv file to read
@@ -29,8 +31,7 @@ def csv_to_list(file_path: object) -> object:
     # # return the temporary list
     return user_stories
 
-# for i in csv_to_list('sample_data/question.csv'):
-#     print(i)
+
 
 
 def display_question(file_path, id):
@@ -42,6 +43,17 @@ def add_data_to_file():
     data_header = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
     file_path = 'sample_data/question.csv'
     existing_data = csv_to_list('sample_data/question.csv')
+    existing_data.append(dictio)
+    with open(file_path, 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=data_header)
+        writer.writeheader()
+        writer.writerows(existing_data)
+
+def add_answer_to_file():
+    dictio = data_manager.get_answer_to_dict()
+    data_header = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
+    file_path = 'sample_data/answer.csv'
+    existing_data = csv_to_list('sample_data/answer.csv')
     existing_data.append(dictio)
     with open(file_path, 'w') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=data_header)

@@ -4,24 +4,35 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
-
-
+<style>
+  body {
+    height: 1000px;
+    background-color: lightblue;
+    background-image: linear-gradient(lightblue, white);
+  }
+  h1 {
+    color: white;
+    text-align: center;
+  }
+</style>
   <h1>{{ question['title'] }}</h1>
-  <form action="/question/{{ question['id'] }}/new-answer" method="Post">
+  <form action="url_for('question', id = question['id'])" method="Post">
     <textarea rows="6" cols="60" disabled>{{ question['message'] }}</textarea>
     <footer>seen by: {{ question['view_number'] }} upvoted: {{ question['vote_number'] }} </footer>
-    <textarea id="new_answer" name="new_answer" rows="15" cols="50" placeholder="Type in your answer" required>Numer pytania {{ question['id'] }}</textarea>
-    <input type="submit" value="Add answer">
-      <br>
   </form>
-
+  <br>
+  <a href="/add_answer"><button type="button">Add answer</button></a>
+  <a href="/delete_question"><button type="button">Delete question</button></a>
 
   <form>
     <h2>Answers:</h2>
     {% for answer in answers %}
-      <p><strong><em>{{ answer['message'] }}</strong></em></p>
+      <p>{{ answer['message'] }}</p>
       <footer>upvoted: {{ answer['vote_number'] }} </footer>
     {% endfor %}
   </form>
+  <br>
+  <a href="/"><button type="button">Main Page</button></a>
+
 {% endblock %}
 
