@@ -47,5 +47,4 @@ def connection_handler(function):
             return ret_value
         except psycopg2.DatabaseError as exception:
             raise exception
-
     return wrapper
