@@ -41,8 +41,7 @@ def delete_question_site():
     return render_template('delete_question.html')
 
 # @app.route('/delete_question', methods=['POST'])
-#     def delete_question(id):
-
+# def delete_question(id):
 
 
 
@@ -70,19 +69,6 @@ def order_question():
 
         return render_template('main_page.html', user_questions=user_questions)
     return render_template('main_page.html', user_questions=user_questions)
-
-@app.route('/question/<id_>', methods=['POST'])
-def add_new_answer(id_):
-    id_ = int(id_)
-    question = connection.display_question('sample_data/question.csv', id_)
-    answers = data_manager.give_specific_answers(id_, connection.csv_to_list('sample_data/answer.csv'))
-    generated_id = data_manager.generate_question_id('sample_data/answer.csv')
-    answer_text = request.form["new_answer"]
-    #TODO ->  zapisywanie do pliku 'answers'
-
-    print(answer_text)
-
-    return redirect(url_for('route_spec_question', id=question['id']))
 
 
 if __name__ == "__main__":

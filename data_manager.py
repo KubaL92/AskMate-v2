@@ -28,7 +28,6 @@ def give_specific_answers(id, list_of_all_answers):
     return list_of_answers
 
 
-
 def get_data_to_dict():
     if request.method == 'POST':
         title = request.form['title']
@@ -39,29 +38,29 @@ def get_data_to_dict():
         image = ""
         submission_time = int(time.time())
         my_dict = {"id": id_,
-                   "submission_time" : submission_time,
-                   "vote_number" : vote_number,
-                   "view_number" : view_number,
+                   "submission_time": submission_time,
+                   "vote_number": vote_number,
+                   "view_number": view_number,
                    "title": title,
                    "message": question,
-                   "image" : image}
+                   "image": image}
 
         return my_dict
 
 
 def get_answer_to_dict(lol):
     if request.method == 'POST':
-        id_= generate_question_id('sample_data/answer.csv')
+        id_ = generate_question_id('sample_data/answer.csv')
         submission_time = int(time.time())
         vote_number = 0
         message = request.form['new_answer']
         image = ""
         question_id = lol
         answer_dict = {"id": id_,
-                       "message" : message,
-                       "submission_time" : submission_time,
-                       "vote_number" : vote_number,
-                       "question_id" : question_id,
-                       "image" : image,
+                       "message": message,
+                       "submission_time": submission_time,
+                       "vote_number": vote_number,
+                       "question_id": question_id,
+                       "image": image,
                        }
         return answer_dict
