@@ -16,7 +16,7 @@
   }
 </style>
   <h1>{{ question['title'] }}</h1>
-  <form action="url_for('question', id = question['id'])" method="Post">
+  <form action="url_for('question', question_id = question['id'])" method="Post">
     <textarea rows="6" cols="60" disabled>{{ question['message'] }}</textarea>
     <footer>seen by: {{ question['view_number'] }} upvoted: {{ question['vote_number'] }} </footer>
   </form>

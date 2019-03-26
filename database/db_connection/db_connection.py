@@ -36,8 +36,8 @@ def open_database():
 def connection_handler(function):
     def wrapper(*args, **kwargs):
         try:
-            connection = open_database()
-            dict_cur = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+            connection = open_database() #połącz z bazą danych
+            dict_cur = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor) #określ cursor
             ret_value = function(dict_cur, *args, **kwargs)
             dict_cur.close()
             connection.close()

@@ -1,7 +1,9 @@
 from flask import request
 import time
-import connection
+from database import db_question, db_answer
 
+
+"""
 def change_to_string(something):
     return str(something)
 
@@ -44,7 +46,6 @@ def give_specific_answers(id, list_of_all_answers):
             list_of_answers.append(answer)
     return list_of_answers
 
-
 def get_data_to_dict():
     if request.method == 'POST':
         title = request.form['title']
@@ -81,3 +82,15 @@ def get_answer_to_dict(lol):
                        "image": image,
                        }
         return answer_dict
+"""
+
+def get_questions():
+    return db_question.get_all_questions()
+
+def get_questions_with_specific_id(question_id):
+    return db_question.get_question_by_id(question_id)
+
+def get_answers(question_id):
+    return db_answer.get_all_answers_by_question_id(question_id)
+
+
