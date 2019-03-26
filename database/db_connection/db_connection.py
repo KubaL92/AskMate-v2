@@ -45,3 +45,4 @@ def connection_handler(function):
         except psycopg2.DatabaseError as exception:
             raise exception
     return wrapper
+
