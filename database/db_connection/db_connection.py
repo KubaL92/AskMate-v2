@@ -22,9 +22,7 @@ def get_connection_string():
         raise KeyError('Some necessary environment variable(s) are not defined')
 
 
-# noinspection PyUnresolvedReferences
 def open_database():
-    # noinspection PyUnresolvedReferences
     try:
         connection_string = get_connection_string()
         connection = psycopg2.connect(connection_string)
@@ -37,7 +35,6 @@ def open_database():
 
 def connection_handler(function):
     def wrapper(*args, **kwargs):
-        # noinspection PyUnresolvedReferences
         try:
             connection = open_database()
             dict_cur = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
@@ -48,3 +45,4 @@ def connection_handler(function):
         except psycopg2.DatabaseError as exception:
             raise exception
     return wrapper
+
