@@ -14,6 +14,8 @@ def get_question_by_id(cursor, question_id):
     question_with_specific_id = cursor.fetchone()
     return question_with_specific_id
 
-
-
-
+"""
+@db_connection.connection_handler
+def add_question(cursor, submission_time, title, message, image):
+    cursor.execute("INSERT INTO question ()")
+"""
