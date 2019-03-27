@@ -87,17 +87,27 @@ def get_answer_to_dict(lol):
         return answer_dict
 """
 
+
 def get_questions():
     return db_question.get_all_questions()
+
 
 def get_questions_with_specific_id(question_id):
     return db_question.get_question_by_id(question_id)
 
+
 def get_answers(question_id):
     return db_answer.get_all_answers_by_question_id(question_id)
+
 
 def insert_question_into_table(title, message, image):
     # wpisane na sztywno: łapki oraz wyświetlenia
     VOTE_NUMBER = 0
     VIEW_NUMBER = 0
     return db_question.add_question(title, message, image, VIEW_NUMBER, VOTE_NUMBER)
+
+
+def insert_answer_to_db(question_id, answer, image):
+    VOTE_NUMBER = 0
+    return db_answer.insert_answer_to_database(answer, question_id, VOTE_NUMBER, image)
+
