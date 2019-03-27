@@ -1,5 +1,26 @@
-import connection
+from flask import request
+import time
+from database import db_question, db_answer
 
+
+"""
+def change_to_string(something):
+    return str(something)
+
+def change_to_integer_and_add_1(something_else):
+    return int(something_else)+1
+
+def update_view_number_in_specific_question(file_path, id):
+    all_with_number_unchanged = connection.csv_to_list(file_path)
+    updated = []
+    for line in all_with_number_unchanged:
+        if line['id']==str(id):
+            line['view_number'] = change_to_integer_and_add_1(line['view_number'])
+            line['view_number'] = change_to_string(line['view_number'])
+            updated.append(line)
+        else:
+            updated.append(line)
+    return updated
 
 def get_titles(user_stories: list) -> list:
     list_of_titles = []
@@ -17,9 +38,61 @@ def generate_question_id(file_path='sample_data/question.csv'):
     return str(id_gen)
 
 
-def give_specific_answers(i_d, list_of_all_answers):
-    list_of_answers=[]
+def give_specific_answers(id, list_of_all_answers):
+    list_of_all_answers = connection.csv_to_list('sample_data/answer.csv')
+    list_of_answers = []
     for answer in list_of_all_answers:
-        if int(answer['question_id']) == i_d:
+        if answer['question_id'] == str(id):
             list_of_answers.append(answer)
     return list_of_answers
+    
+    
+
+def get_data_to_dict():
+    if request.method == 'POST':
+        title = request.form['title']
+        question = request.form['question']
+        id_ = generate_question_id('sample_data/question.csv')
+        view_number = 0
+        vote_number = 0
+        image = ""
+        submission_time = int(time.time())
+        my_dict = {"id": id_,
+                   "submission_time" : submission_time,
+                   "vote_number" : vote_number,
+                   "view_number" : view_number,
+                   "title": title,
+                   "message": question,
+                   "image" : image}
+
+        return my_dict
+
+
+def get_answer_to_dict(lol):
+    if request.method == 'POST':
+        id_= generate_question_id('sample_data/answer.csv')
+        submission_time = int(time.time())
+        vote_number = 0
+        message = request.form['new_answer']
+        image = ""
+        question_id = lol
+        answer_dict = {"id": id_,
+                       "message" : message,
+                       "submission_time" : submission_time,
+                       "vote_number" : vote_number,
+                       "question_id" : question_id,
+                       "image" : image,
+                       }
+        return answer_dict
+"""
+
+def get_questions():
+    return db_question.get_all_questions()
+
+def get_questions_with_specific_id(question_id):
+    return db_question.get_question_by_id(question_id)
+
+def get_answers(question_id):
+    return db_answer.get_all_answers_by_question_id(question_id)
+
+
