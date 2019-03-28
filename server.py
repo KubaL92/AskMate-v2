@@ -47,7 +47,7 @@ def add_new_answer_to_db(question_id):
 
     answer = request.form["new_answer"]
     image = request.form["image"]
-    db_answer.insert_answer_to_database(question_id, answer, image)
+    data_manager.insert_answer_to_db(question_id, answer, image)
     return redirect(url_for('route_spec_question', question_id=question_id))
 
 """

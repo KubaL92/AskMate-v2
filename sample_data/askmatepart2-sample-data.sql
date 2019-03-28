@@ -119,7 +119,7 @@ SELECT pg_catalog.setval('comment_id_seq', 2, true);
 
 INSERT INTO tag VALUES (1, 'python');
 INSERT INTO tag VALUES (2, 'sql');
-INSERT INTO tag VALUES (3, 'css');
+INSERT INTO tag VALUES (3, 'static');
 SELECT pg_catalog.setval('tag_id_seq', 3, true);
 
 INSERT INTO question_tag VALUES (0, 1);

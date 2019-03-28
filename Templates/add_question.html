@@ -4,17 +4,7 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
-<style>
-  body {
-    height: 1000px;
-    background-color: lightblue;
-    background-image: linear-gradient(lightblue, white);
-  }
-  h1 {
-    color: white;
-    text-align: center;
-  }
-</style>
+
   <h1>Add new question</h1>
   <form action="question" method="POST">
     <label for="title">Question Title</label>
