@@ -126,3 +126,10 @@ def update_question_view_number(question_id):
 
 
 def upvote_answer(id):
+    updated_vote_numer = db_answer.get_answer_vote_number_and_add(id)
+    return db_answer.update_vote_number(id, updated_vote_numer)
+
+
+def downvote_answer(id):
+    updated_vote_numer = db_answer.get_answer_vote_number_and_substract(id)
+    return db_answer.update_vote_number(id, updated_vote_numer)
