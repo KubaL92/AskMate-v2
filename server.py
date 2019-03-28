@@ -55,7 +55,10 @@ def delete_questions_answer(question_id, id):
     return redirect(url_for('route_spec_question', question_id=question_id))
 
 
-
+@app.route("/delete-question/<id>")
+def delete_question(id):
+    data_manager.delete_question_from_db(id)
+    return redirect('/')
 
 
 

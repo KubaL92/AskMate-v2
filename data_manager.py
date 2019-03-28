@@ -114,3 +114,7 @@ def insert_answer_to_db(question_id, answer, image):
 
 def delete_answer_from_db(answer_id):
     return db_answer.delete_answer(answer_id)
+
+
+def delete_question_from_db(question_id):
+    return db_question.delete_question(question_id)
