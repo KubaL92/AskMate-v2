@@ -6,7 +6,7 @@
 {% block content %}
 
   <h1>Add new answer</h1>
-  <form action="/add_answer/{{id}}" method="POST">
+  <form action="/submit_answer/{{id}}" method="POST">
     <label for="new_answer"></label>
     <br>
     <textarea id="new_answer" name="new_answer" rows="15" cols="100" placeholder="Your answer here" required></textarea>

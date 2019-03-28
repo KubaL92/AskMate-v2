@@ -34,7 +34,18 @@
     </h2>
     <h3><ol class="a">
     {% for question in user_questions %}
-        <li><a href="{{ url_for('route_spec_question', question_id=question['id']) }}">{{ question['title'] }}</a></li>
+        <li>
+
+            <a href="{{ url_for('route_spec_question', question_id=question['id']) }}">{{ question['title'] }}</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <a href="/delete-question/{{ question['id'] }}"/>
+                <img src="https://cdn.pixabay.com/photo/2012/04/01/17/31/trash-can-23653__340.png" width="16" height="16" border="0">
+            </a>
+
+
+        </li>
+
         <br>
     {% else %}
         <p>No posts yet</p>
