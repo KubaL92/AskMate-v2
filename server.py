@@ -32,8 +32,9 @@ def add_question_to_database():
 
 
 @app.route('/question/<int:question_id>', methods=['GET', 'POST'])
-def route_spec_question(question_id):
-    data_manager.update_question_view_number(question_id)
+def route_spec_question(question_id, count=True):
+    if count == True:
+        data_manager.update_question_view_number(question_id)
     question = data_manager.get_questions_with_specific_id(question_id)
     answers = data_manager.get_answers(question_id)
     return render_template('question_page.html',
@@ -48,6 +49,34 @@ def add_new_answer_to_db(question_id):
     image = request.form["image"]
     data_manager.insert_answer_to_db(question_id, answer, image)
     return redirect(url_for('route_spec_question', question_id=question_id))
+
+
+@app.route("/question/<int:question_id>/delete/<id>")
+def delete_questions_answer(question_id, id):
+    data_manager.delete_answer_from_db(id)
+    return redirect(url_for('route_spec_question', question_id=question_id))
+
+@app.route("/question/<int:question_id>/upvote/<id>")
+def upvote_answer(question_id, id):
+    data_manager.upvote_answer(id)
+    return redirect(url_for('route_spec_question', question_id=question_id, count=False))
+
+
+
+@app.route("/question/<int:question_id>/downvote/<id>")
+def downvote_answer(question_id, id):
+    data_manager.downvote_answer(id)
+    return redirect(url_for('route_spec_question', question_id=question_id, count=False))
+
+
+
+
+@app.route("/delete-question/<id>")
+def delete_question(id):
+    data_manager.delete_question_from_db(id)
+    return redirect('/')
+
+
 
 """
 @app.route('/add_answer/<id>')

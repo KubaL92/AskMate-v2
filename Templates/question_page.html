@@ -4,20 +4,10 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
-<style>
-  body {
-    height: 1000px;
-    background-color: lightblue;
-    background-image: linear-gradient(lightblue, white);
-  }
-  h1 {
-    color: white;
-    text-align: center;
-  }
-</style>
+
   <h1>{{ question['title'] }}</h1>
   <form action="url_for('question', question_id = question['id'])" method="Post">
-    <textarea rows="6" cols="60" disabled>{{ question['message'] }}</textarea>
+    <h4 id="la_question">{{ question['message'] }}</h4>
     <footer>seen by: {{ question['view_number'] }} upvoted: {{ question['vote_number'] }} </footer>
   </form>
   <br>
@@ -27,7 +17,23 @@
   <form>
     <h2>Answers:</h2>
     {% for answer in answers %}
-      <p>{{ answer['message'] }}</p>
+      <p>{{ answer['message'] }}
+        <a href="/question/{{answer['question_id']}}/delete/{{answer['id']}}">
+
+          <img src="https://cdn.pixabay.com/photo/2012/04/01/17/31/trash-can-23653__340.png" alt="Delete" width="24" height="24" border="0">
+        </a>
+        <br>
+        <a href="/question/{{answer['question_id']}}/upvote/{{answer['id']}}">
+
+          <img src="https://cdn0.iconfinder.com/data/icons/faces-3/24/34-512.png" alt="Upvote" width="24" height="24" border="0">
+
+        </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="/question/{{answer['question_id']}}/downvote/{{answer['id']}}">
+
+          <img src="https://cdn0.iconfinder.com/data/icons/faces-3/24/35-512.png" alt="Downvote" width="24" height="24" border="0">
+        </a>
+      </p>
       <footer>upvoted: {{ answer['vote_number'] }} </footer>
     {% endfor %}
   </form>
