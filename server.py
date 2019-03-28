@@ -40,7 +40,7 @@ def route_spec_question(question_id):
                            answers=answers)
 
 
-@app.route('/submit_answer/<question_id>', methods=['POST'])
+@app.route('/submit_answer/<int:question_id>', methods=['POST'])
 def add_new_answer_to_db(question_id):
 
     answer = request.form["new_answer"]
