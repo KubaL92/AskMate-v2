@@ -111,3 +111,6 @@ def insert_answer_to_db(question_id, answer, image):
     VOTE_NUMBER = 0
     return db_answer.insert_answer_to_database(answer, question_id, VOTE_NUMBER, image)
 
+def update_question_view_number(question_id):
+    updated_view_number = db_question.get_question_view_number_and_update(question_id)
+    return db_question.update_question_view_number(question_id, updated_view_number)
