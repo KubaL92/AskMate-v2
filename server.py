@@ -48,6 +48,17 @@ def add_new_answer_to_db(question_id):
     data_manager.insert_answer_to_db(question_id, answer, image)
     return redirect(url_for('route_spec_question', question_id=question_id))
 
+
+@app.route("/question/<int:question_id>/delete/<id>")
+def delete_questions_answer(question_id, id):
+    data_manager.delete_answer_from_db(id)
+    return redirect(url_for('route_spec_question', question_id=question_id))
+
+
+
+
+
+
 """
 @app.route('/add_answer/<id>')
 def ans_site(id):

@@ -111,3 +111,6 @@ def insert_answer_to_db(question_id, answer, image):
     VOTE_NUMBER = 0
     return db_answer.insert_answer_to_database(answer, question_id, VOTE_NUMBER, image)
 
+
+def delete_answer_from_db(answer_id):
+    return db_answer.delete_answer(answer_id)

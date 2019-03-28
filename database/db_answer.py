@@ -23,3 +23,8 @@ def insert_answer_to_database(cursor, message, question_id, vote_number, image):
     #
     # question_id = cursor.fetchone()
     # return int(question_id['question_id'])
+
+
+@db_connection.connection_handler
+def delete_answer(cursor, answer_id):
+    cursor.execute("DELETE FROM answer WHERE id = %s", answer_id)
