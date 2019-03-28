@@ -123,3 +123,6 @@ def delete_question_from_db(question_id):
 def update_question_view_number(question_id):
     updated_view_number = db_question.get_question_view_number_and_update(question_id)
     return db_question.update_question_view_number(question_id, updated_view_number)
+
+
+def upvote_answer(id):

@@ -55,6 +55,11 @@ def delete_questions_answer(question_id, id):
     data_manager.delete_answer_from_db(id)
     return redirect(url_for('route_spec_question', question_id=question_id))
 
+@app.route("/question/<int:question_id>/upvote/<id>")
+def upvote_answer(question_id, id):
+    data_manager.upvote_answer(id)
+    return redirect(url_for('route_spec_question', question_id=question_id))
+
 
 @app.route("/delete-question/<id>")
 def delete_question(id):

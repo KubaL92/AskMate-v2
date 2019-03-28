@@ -28,3 +28,21 @@ def insert_answer_to_database(cursor, message, question_id, vote_number, image):
 @db_connection.connection_handler
 def delete_answer(cursor, answer_id):
     cursor.execute("DELETE FROM answer WHERE id = %s", answer_id)
+
+
+@db_connection.connection_handler
+def get_answer_vote_number(cursor, question_id):
+    cursor.execute("SELECT vote_number FROM answer WHERE id=%(question_id)s", {'question_id': question_id})
+    view_number = cursor.fetchone()['view_number']
+    updated_view_number = view_number + 1
+    return updated_view_number
+
+
+@db_connection.connection_handler
+def upvote_number(cursor, question_id, updated_view_number):
+    cursor.execute("UPDATE question SET view_number = %(updated_view_number)s WHERE id=%(question_id)s", ({'question_id': question_id,
+                                                                                                    'updated_view_number':updated_view_number}))
+
+
+
+
