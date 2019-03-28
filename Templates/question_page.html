@@ -28,9 +28,9 @@
     <h2>Answers:</h2>
     {% for answer in answers %}
       <p>{{ answer['message'] }}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="/question/{{answer['question_id']}}/delete/{{answer['id']}}">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <img src="https://cdn.pixabay.com/photo/2012/04/01/17/31/trash-can-23653__340.png" alt="Go to W3Schools!" width="12" height="12" border="0">
+          <img src="https://cdn.pixabay.com/photo/2012/04/01/17/31/trash-can-23653__340.png" width="12" height="12" border="0">
         </a>
       </p>
       <footer>upvoted: {{ answer['vote_number'] }} </footer>

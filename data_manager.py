@@ -115,6 +115,11 @@ def insert_answer_to_db(question_id, answer, image):
 def delete_answer_from_db(answer_id):
     return db_answer.delete_answer(answer_id)
 
+
+def delete_question_from_db(question_id):
+    return db_question.delete_question(question_id)
+
+
 def update_question_view_number(question_id):
     updated_view_number = db_question.get_question_view_number_and_update(question_id)
     return db_question.update_question_view_number(question_id, updated_view_number)
