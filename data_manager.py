@@ -10,6 +10,7 @@ def change_to_string(something):
 def change_to_integer_and_add_1(something_else):
     return int(something_else)+1
 
+
 def update_view_number_in_specific_question(file_path, id):
     all_with_number_unchanged = connection.csv_to_list(file_path)
     updated = []
@@ -22,13 +23,14 @@ def update_view_number_in_specific_question(file_path, id):
             updated.append(line)
     return updated
 
+# absolutnie niepotrzebne
 def get_titles(user_stories: list) -> list:
     list_of_titles = []
     for i in user_stories:
         list_of_titles.append(i['title'])
     return list_of_titles
 
-
+# absolutnie niepotrzebne
 def generate_question_id(file_path='sample_data/question.csv'):
     question_list = connection.csv_to_list(file_path)
     id_ = 0
@@ -37,7 +39,7 @@ def generate_question_id(file_path='sample_data/question.csv'):
     id_gen = id_ + 1
     return str(id_gen)
 
-
+# absolutnie niepotrzebne
 def give_specific_answers(id, list_of_all_answers):
     list_of_all_answers = connection.csv_to_list('sample_data/answer.csv')
     list_of_answers = []
@@ -47,7 +49,6 @@ def give_specific_answers(id, list_of_all_answers):
     return list_of_answers
     
     
-
 def get_data_to_dict():
     if request.method == 'POST':
         title = request.form['title']
@@ -86,13 +87,27 @@ def get_answer_to_dict(lol):
         return answer_dict
 """
 
+
 def get_questions():
     return db_question.get_all_questions()
+
 
 def get_questions_with_specific_id(question_id):
     return db_question.get_question_by_id(question_id)
 
+
 def get_answers(question_id):
     return db_answer.get_all_answers_by_question_id(question_id)
 
+
+def insert_question_into_table(title, message, image):
+    # wpisane na sztywno: łapki oraz wyświetlenia
+    VOTE_NUMBER = 0
+    VIEW_NUMBER = 0
+    return db_question.add_question(title, message, image, VIEW_NUMBER, VOTE_NUMBER)
+
+
+def insert_answer_to_db(question_id, answer, image):
+    VOTE_NUMBER = 0
+    return db_answer.insert_answer_to_database(answer, question_id, VOTE_NUMBER, image)
 
