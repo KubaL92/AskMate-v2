@@ -5,16 +5,18 @@
 {% endblock %}
 {% block content %}
 
-  <h1>Add new answer</h1>
+ <h1 id="title">ASK MATE V2</h1>
+<h2>Add answer</h2>
+<a href="/"><button type="button" class="addbtn"><span>Main Page</span></button></a>
   <form action="/submit_answer/{{id}}" method="POST">
     <label for="new_answer"></label>
     <br>
     <textarea id="new_answer" name="new_answer" rows="15" cols="100" placeholder="Your answer here" required></textarea>
     <br>
-    <input id="image" name="image" type="text" required placeholder="To jest image" size="10">
+    <!input id="image" name="image" type="text" required placeholder="To jest image" size="10">
     <br>
-    <input type="submit" value="Send">
+      <button type="submit" class="addbtn" id="send_button"><span>Send</span></button>
   </form>
   <br>
-  <a href="/"><button type="button">Main Page</button></a>
+
 {% endblock %}

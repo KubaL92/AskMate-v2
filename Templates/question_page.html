@@ -5,27 +5,29 @@
 {% endblock %}
 {% block content %}
 
-  <h1>{{ question['title'] }}</h1>
+<h1 id="title">ASK MATE V2 <i class="fas fa-cloud"></i></h1>
+<a href="/"><button type="button" class="addbtn"><span>Main Page</span></button></a>
+  <h2 id="la_question"> {{ question['title'] }}</h2>
   <form action="url_for('question', question_id = question['id'])" method="Post">
-    <h4 id="la_question">{{ question['message'] }}</h4>
-    <footer>seen by: {{ question['view_number'] }} upvoted: {{ question['vote_number'] }} </footer>
+    <h3 id="la_question">{{ question['message'] }}</h3>
+    <footer id="la_question">seen by: {{ question['view_number'] }} upvoted: {{ question['vote_number'] }} </footer>
   </form>
   <br>
-  <a href="/add_answer/{{question['id']}}"><button type="button">Add answer</button></a>
-  <a href="/delete_question"><button type="button">Delete question</button></a>
+<a href="/add_answer/{{question['id']}}"><button type="button" class="addbtn" id="add_answer_button"><span>Add answer</span></button></a>
+<!--<a href="/delete_question"><button type="button" class="addbtn"><span>Delete question</span></button></a>-->
 
   <form>
-    <h2>Answers:</h2>
+    <h2 id="answers">Answers:</h2>
     {% for answer in answers %}
-      <p>{{ answer['message'] }}
+      <p id="answers">{{ answer['message'] }}
         <a href="/question/{{answer['question_id']}}/delete/{{answer['id']}}">
 
           <img src="https://cdn.pixabay.com/photo/2012/04/01/17/31/trash-can-23653__340.png" alt="Delete" width="24" height="24" border="0">
         </a>
-        <br>
+          <br>
         <a href="/question/{{answer['question_id']}}/upvote/{{answer['id']}}">
 
-          <img src="https://cdn0.iconfinder.com/data/icons/faces-3/24/34-512.png" alt="Upvote" width="24" height="24" border="0">
+          <img id="icons" src="https://cdn0.iconfinder.com/data/icons/faces-3/24/34-512.png" alt="Upvote" width="24" height="24" border="0">
 
         </a>
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -34,11 +36,10 @@
           <img src="https://cdn0.iconfinder.com/data/icons/faces-3/24/35-512.png" alt="Downvote" width="24" height="24" border="0">
         </a>
       </p>
-      <footer>upvoted: {{ answer['vote_number'] }} </footer>
+      <footer id="answers">upvoted: {{ answer['vote_number'] }} </footer>
     {% endfor %}
   </form>
   <br>
-  <a href="/"><button type="button">Main Page</button></a>
 
 {% endblock %}
 
