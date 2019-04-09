@@ -4,18 +4,10 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
-<style>
-  body {
-    height: 1000px;
-    background-color: lightblue;
-    background-image: linear-gradient(lightblue, white);
-  }
-  h1 {
-    color: white;
-    text-align: center;
-  }
-</style>
-  <h1>Add new question</h1>
+
+  <h1 id="title">ASK MATE V2</h1>
+<h2>Add question</h2>
+<a href="/"><button type="button" class="addbtn"><span>Main Page</span></button></a>
   <form action="question" method="POST">
     <label for="title">Question Title</label>
     <input id="title" name="title" type="text" required placeholder="State topic of your question" size="25">
@@ -24,11 +16,10 @@
     <br>
     <textarea id="question" name="question" rows="15" cols="100" placeholder="Your question here" required></textarea>
     <br>
-    <input type="submit" value="Send">
+      <button type="submit" class="addbtn" id="send_button"><span>Send</span></button>
     <br>
-    <input id="image" name="image" type="text" required placeholder="To jest image" size="10">
+    <!input id="image" name="image" type="text" required placeholder="To jest image" size="10">
   </form>
   <br>
-  <a href="/"><button type="button">Main Page</button></a>
 {% endblock %}
 

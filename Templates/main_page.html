@@ -4,49 +4,32 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
-<style>
-    body {
-        height: 1000px;
-        background-color: lightblue;
-        background-image: linear-gradient(lightblue, white);
-    }
-    h1 {
-        color: black;
-        text-align: center;
-        font-style: italic
-    }
-    h2 {
-        text-align: right;
-    }
-    ul.a {
-        list-style-type: circle;
-    }
-</style>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-    <h1>ASK MATE V1 <i class="fas fa-cloud"></i></h1>
-<select name="order_by" form="sort-question-form">
-    <option value="title">Title</option>
-    <option value="submission_time">Time</option>
-    <option selected value="id">ID</option>
-    <option value="view_number">View Number</option>
-    <option value="vote_number">View Number</option>
-    <option value="message">Message</option>
+    <h1 id="title">ASK MATE V2 <i class="fas fa-cloud"></i></h1>
+<!--<select name="order_by" form="sort-question-form">-->
+    <!--<option value="title">Title</option>-->
+    <!--<option value="submission_time">Time</option>-->
+    <!--<option selected value="id">ID</option>-->
+    <!--<option value="view_number">View Number</option>-->
+    <!--<option value="vote_number">View Number</option>-->
+    <!--<option value="message">Message</option>-->
 
-</select>
-<select name="order_direction" form="sort-question-form">
-    <option selected value="asc" >Ascending Order</option>
-    <option value="desc">Descending Order</option>
-</select>
+<!--</select>-->
+<!--<select name="order_direction" form="sort-question-form">-->
+    <!--<option selected value="asc" >Ascending Order</option>-->
+    <!--<option value="desc">Descending Order</option>-->
+<!--</select>-->
 
 
-<input type="submit" value="Sort" form="sort-question-form">
+<!--<input type="submit" value="Sort" form="sort-question-form">-->
 
 <form action="/list" id="sort-question-form" method="GET"></form>
     <h2><form action="/add_question">
-        <input type="submit" value="Add new question">
+        <button type="submit" class="addbtn"><span>Add new question</span></button>
     </form>
     </h2>
     <h3><ol class="a">

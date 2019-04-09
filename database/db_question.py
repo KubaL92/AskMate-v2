@@ -1,5 +1,4 @@
 # moduł łączenia z bazą danych, obsługujący tablicę question
-
 from database.db_connection import db_connection
 
 
@@ -34,8 +33,8 @@ def add_question(cursor, title, message, image, view_number, vote_number):
 
 @db_connection.connection_handler
 def delete_question(cursor, question_id):
-    cursor.execute("DELETE FROM question WHERE id = %(question_id)s", ({'question_id': question_id}))
     cursor.execute("DELETE FROM answer WHERE question_id = %(question_id)s", ({'question_id': question_id}))
+    cursor.execute("DELETE FROM question WHERE id = %(question_id)s", ({'question_id': question_id}))
 
 
 @db_connection.connection_handler

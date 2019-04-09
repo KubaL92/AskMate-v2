@@ -26,7 +26,7 @@ def ans_site(id):
 def add_question_to_database():
     title = request.form["title"]
     message = request.form["question"]
-    image = request.form["image"]
+    image = "Null"
     question_id = data_manager.insert_question_into_table(title, message, image)
     return redirect(url_for('route_spec_question', question_id=question_id))
 
@@ -46,7 +46,7 @@ def route_spec_question(question_id, count=True):
 def add_new_answer_to_db(question_id):
 
     answer = request.form["new_answer"]
-    image = request.form["image"]
+    image = "Null"
     data_manager.insert_answer_to_db(question_id, answer, image)
     return redirect(url_for('route_spec_question', question_id=question_id))
 

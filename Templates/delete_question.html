@@ -4,18 +4,8 @@
 {{ super() }}
 {% endblock %}
 {% block content %}
-<style>
-    body {
-        height: 1000px;
-        background-color: lightblue;
-        background-image: linear-gradient(lightblue, white);
-    }
-    h1 {
-        color: white;
-        text-align: center;
-    }
-</style>
-<h1>Are you sure?</h1>
+
+<h1 id="title">Are you sure?</h1>
 <form action="delete_question" method="POST">
     <input type="submit" value="Yes">
 </form>
