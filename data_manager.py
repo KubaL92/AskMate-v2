@@ -142,4 +142,4 @@ def hashing_parole(password):
 
 
 def processing_registration_data(username, hashed_password):
-    return username, hashed_password
+    return db_user.add_to_db(username, hashed_password)
