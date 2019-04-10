@@ -18,6 +18,18 @@ def login_page():
     return render_template('login.html')
 
 
+@app.route('/login', methods=['POST'])
+def validate_login_data():
+    user_name = request.form['log_usrname']
+    password = request.form['log_pswrd']
+    hashed_password = data_manager.hashing_parole(password)
+
+
+@app.route('/registration')
+def registration_form():
+    return render_template('registration.html')
+
+
 @app.route('/add_question')
 def route_add_question():
     return render_template('add_question.html')

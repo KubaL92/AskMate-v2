@@ -7,13 +7,14 @@
 <h2>LOGIN</h2>
 <form action="/" method="post">
   <label for="username">User Name:</label>
-  <input id="username" type="text" required minlenght="3" maxlength="10" />
+  <input id="username" name="log_usrname" type="text" required minlenght="3" maxlength="10" />
     <br>
   <label for="password">Password:</label>
-  <input id="password" type="password" required minlenght="3" maxlength="10" />
+  <input id="password" name="log_pswrd" type="password" required minlenght="3" maxlength="10" />
     <br>
   <button type="submit">Log In</button>
 </form>
+<h3>You don't have account? <a>Register here</a></h3>
 <a href="/"><button type="button">Main Page</button></a>
 
 {% endblock %}

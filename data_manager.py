@@ -1,7 +1,6 @@
 from flask import request
-import time
-from database import db_question, db_answer
-
+import bcrypt
+from database import db_question, db_answer, db_user
 
 """
 def change_to_string(something):
@@ -133,3 +132,14 @@ def upvote_answer(id):
 def downvote_answer(id):
     updated_vote_numer = db_answer.get_answer_vote_number_and_substract(id)
     return db_answer.update_vote_number(id, updated_vote_numer)
+
+
+###### HERE COMES USERS VERIFICATION PART ######
+
+def hashing_parole(password):
+    hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
+    return hashed_password
+
+
+def processing_registration_data(username, hashed_password):
+    return username, hashed_password

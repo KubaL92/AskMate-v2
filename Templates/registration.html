@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}Registration{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+<h2>Registration</h2>
+<form action="/login" method="post">
+  <label for="username">User Name:</label>
+  <input id="username" name="reg_usrname" type="text" required minlenght="3" maxlength="10" />
+    <br>
+  <label for="password">Password:</label>
+  <input id="password" name="reg_pswrd" type="password" required minlenght="3" maxlength="10" />
+    <br>
+  <button type="submit">Send</button>
+</form>
+<a href="/"><button type="button">Main Page</button></a>
+
+{% endblock %}
