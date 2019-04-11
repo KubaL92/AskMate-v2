@@ -9,7 +9,6 @@ app.secret_key = 'Impond3rabIlli@'
 @app.route('/', methods=['GET', 'POST'])
 def route_index():
     user_questions = data_manager.get_questions()
-
     return render_template('main_page.html', user_questions=user_questions)
 
 @app.route('/login')

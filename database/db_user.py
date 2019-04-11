@@ -6,15 +6,21 @@ from database.db_connection import db_connection
  #   cursor.execute("""INSERT INTO user_data(registration_time, username, password)
   #                  VALUES (date_trunc('minute', now()), %(username)s, %(password)s)
    #                   RETURNING user_id""", {'username': username, 'password': password})
-def add_to_db(username, user_id, password, cursor):  # zapis do bazy danych z arkusza rejestracji
-    sql_str = """INSERT INTO user_data(registration_time, user_id, username, password)
-    VALUES (current_timestamp, %(user_id)s, %(username)s, %(password)s)
+def add_to_db(cursor, user_id, username, hashed_password):  # zapis do bazy danych z arkusza rejestracji
+    print(user_id, username, hashed_password)
+    sql_str = """INSERT INTO user_data(user_id, registration_time,  username, password)
+    VALUES (%(user_id)s, CURRENT_TIMESTAMP, %(username)s, %(password)s)
     RETURNING user_id"""
-    cursor.execute(sql_str({'username': username,
-                            'password': password,
-                            'user_id': user_id}))
+    print('dupsko')
+
+    cursor.execute(sql_str, {'user_id': user_id,
+                            'username': username,
+                            'password': hashed_password
+                            })
+    print('dupa')
     usr_id = cursor.fetchone()
-    return int(usr_id['user_id'])
+    print(usr_id)
+    return usr_id['user_id']
 
 
 @db_connection.connection_handler

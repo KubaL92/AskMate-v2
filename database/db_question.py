@@ -19,7 +19,7 @@ def get_question_by_id(cursor, question_id):
 @db_connection.connection_handler
 def add_question(cursor, title, message, image, view_number, vote_number):
     sql_str = """ INSERT INTO question(submission_time, view_number, vote_number, title, message, image) 
-    VALUES (CURRENT_TIMESTAMP , %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s)
+    VALUES (CURRENT_TIMESTAMP, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s)
     RETURNING id """
     cursor.execute(sql_str, ({'title': title,
                               'message': message,

@@ -77,10 +77,12 @@ def check_id_uniqueness():
 
 
 def processing_registration_data(username, hashed_password):
-    user_id = db_user.add_to_db(username, hashed_password)
-    return user_id
     user_id = check_id_uniqueness()
-    return db_user.add_to_db(username, hashed_password, user_id)
+    try:
+        id = db_user.add_to_db(user_id, username, hashed_password)
+        return id
+    except TypeError:
+        print('Cokolwiek')
 
 def is_existing(login):
     existance = db_user.check_if_user_exists(login)['exists']
