@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, url_for, redirect, session, abort
+from flask import Flask, render_template, request, url_for, redirect, session, abort, flash
 import data_manager
 
 
 app = Flask(__name__, template_folder='Templates')
+app.secret_key = 'Impond3rabIlli@'
 
 
 @app.route('/')
@@ -11,17 +12,34 @@ def route_index():
 
     return render_template('main_page.html', user_questions=user_questions)
 
-
 @app.route('/login')
 def login_page():
-
     return render_template('login.html')
+
+@app.route('/login', methods=['POST'])
+def log_user():
+    login = request.form.get('logusrname')
+    password = request.form.get('logpswrd')
+    if not data_manager.is_existing(login):
+        flash('User not existant')
+        return redirect('/login')
+    if not data_manager.are_passwords_equal(password, login):
+        flash('Incorrect password')
+        return redirect('/login')
+    session['username']=login
+    return redirect('/')
+
+@app.route('/logout')
+def logout():
+    session.pop('username')
+    return redirect('/')
+
 
 
 @app.route('/login', methods=['POST'])
 def validate_login_data():
-    user_name = request.form['log_usrname']
-    password = request.form['log_pswrd']
+    user_name = request.form['logusrname']
+    password = request.form['logpswrd']
     hashed_password = data_manager.hashing_parole(password)
     return redirect(url_for('route_index'))
 
@@ -32,8 +50,8 @@ def registration_page():
 
 @app.route('/registration', methods=['POST'])
 def add_user_to_database():
-    user_name = request.form('reg_usrname')
-    password = request.form('reg_pswrd')
+    user_name = request.form['regusrname']
+    password = request.form['regpswrd']
     hashed_password = data_manager.hashing_parole(password)
     usr_id = data_manager.processing_registration_data()
     return redirect('route_index', user_id=usr_id)
@@ -41,6 +59,7 @@ def add_user_to_database():
 @app.route('/add_question')
 def route_add_question():
     return render_template('add_question.html')
+
 
 
 @app.route('/add_answer/<id>')
@@ -59,6 +78,7 @@ def add_question_to_database():
 
 @app.route('/question/<int:question_id>', methods=['GET', 'POST'])
 def route_spec_question(question_id, count=True):
+    count=request.args.get('count')
     if count == True:
         data_manager.update_question_view_number(question_id)
     question = data_manager.get_questions_with_specific_id(question_id)
@@ -106,25 +126,6 @@ def delete_question(id):
 # def login_handler():
 #
 
-"""
-@app.route("/list", methods=['GET'])
-def order_question():
-    user_questions = connection.csv_to_list('sample_data/question.csv')
-
-    order_by = request.args.get('order_by')
-    order_direction = request.args.get('order_direction')
-    if order_by in ["id", "submission_time", "view_number", "vote_number", "title", "message", "image"]:
-        if order_direction == "asc":
-            user_questions = sorted(user_questions, key=lambda dict_: dict_[order_by])
-        else:
-            user_questions = sorted(
-                user_questions,
-                key=lambda dict_: dict_[order_by],
-                reverse=True)
-
-        return render_template('main_page.html', user_questions=user_questions)
-    return render_template('main_page.html', user_questions=user_questions)
-"""
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,91 +1,8 @@
 from flask import request
 import bcrypt
 from database import db_question, db_answer, db_user
-
-"""
-def change_to_string(something):
-    return str(something)
-
-def change_to_integer_and_add_1(something_else):
-    return int(something_else)+1
-
-
-def update_view_number_in_specific_question(file_path, id):
-    all_with_number_unchanged = connection.csv_to_list(file_path)
-    updated = []
-    for line in all_with_number_unchanged:
-        if line['id']==str(id):
-            line['view_number'] = change_to_integer_and_add_1(line['view_number'])
-            line['view_number'] = change_to_string(line['view_number'])
-            updated.append(line)
-        else:
-            updated.append(line)
-    return updated
-
-# absolutnie niepotrzebne
-def get_titles(user_stories: list) -> list:
-    list_of_titles = []
-    for i in user_stories:
-        list_of_titles.append(i['title'])
-    return list_of_titles
-
-# absolutnie niepotrzebne
-def generate_question_id(file_path='sample_data/question.csv'):
-    question_list = connection.csv_to_list(file_path)
-    id_ = 0
-    for question in question_list:
-        id_ = int(question['id'])
-    id_gen = id_ + 1
-    return str(id_gen)
-
-# absolutnie niepotrzebne
-def give_specific_answers(id, list_of_all_answers):
-    list_of_all_answers = connection.csv_to_list('sample_data/answer.csv')
-    list_of_answers = []
-    for answer in list_of_all_answers:
-        if answer['question_id'] == str(id):
-            list_of_answers.append(answer)
-    return list_of_answers
-    
-    
-def get_data_to_dict():
-    if request.method == 'POST':
-        title = request.form['title']
-        question = request.form['question']
-        id_ = generate_question_id('sample_data/question.csv')
-        view_number = 0
-        vote_number = 0
-        image = ""
-        submission_time = int(time.time())
-        my_dict = {"id": id_,
-                   "submission_time" : submission_time,
-                   "vote_number" : vote_number,
-                   "view_number" : view_number,
-                   "title": title,
-                   "message": question,
-                   "image" : image}
-
-        return my_dict
-
-
-def get_answer_to_dict(lol):
-    if request.method == 'POST':
-        id_= generate_question_id('sample_data/answer.csv')
-        submission_time = int(time.time())
-        vote_number = 0
-        message = request.form['new_answer']
-        image = ""
-        question_id = lol
-        answer_dict = {"id": id_,
-                       "message" : message,
-                       "submission_time" : submission_time,
-                       "vote_number" : vote_number,
-                       "question_id" : question_id,
-                       "image" : image,
-                       }
-        return answer_dict
-"""
-
+import random
+import string
 
 def get_questions():
     return db_question.get_all_questions()
@@ -141,5 +58,35 @@ def hashing_parole(password):
     return hashed_password
 
 
+def id_generator(size=7, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
+
+def prepare_list_of_existing_ids():
+    existing_ids = []
+    ids_dict = db_user.get_all_users_id()
+    for id in ids_dict:
+        existing_ids.append(id['user_id'])
+    return existing_ids
+
+def check_id_uniqueness():
+    existing_ids = prepare_list_of_existing_ids()
+    unique_id = id_generator()
+    while unique_id in existing_ids:
+        unique_id = id_generator()
+    return unique_id
+
+
 def processing_registration_data(username, hashed_password):
-    return db_user.add_to_db(username, hashed_password)
+    user_id = check_id_uniqueness()
+    return db_user.add_to_db(username, hashed_password, user_id)
+
+def is_existing(login):
+    existance = db_user.check_if_user_exists(login)['exists']
+    return existance
+
+def are_passwords_equal(usr_password, login):
+    db_password = db_user.get_password(login)['password']
+    if usr_password == db_password:
+        return True
+    else:
+        return False

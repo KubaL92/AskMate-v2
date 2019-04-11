@@ -6,6 +6,11 @@
 {% block content %}
 
 <h1 id="title">ASK MATE V2 <i class="fas fa-cloud"></i></h1>
+{% if session['username'] %}
+        <h4>Hi {{session['username']}}!</h4>
+{% else %}
+        <h4>You're not logged in</h4>
+{% endif %}
 <a href="/"><button type="button" class="addbtn"><span>Main Page</span></button></a>
   <h2 id="la_question"> {{ question['title'] }}</h2>
   <form action="url_for('question', question_id = question['id'])" method="Post">
@@ -14,7 +19,6 @@
   </form>
   <br>
 <a href="/add_answer/{{question['id']}}"><button type="button" class="addbtn" id="add_answer_button"><span>Add answer</span></button></a>
-<!--<a href="/delete_question"><button type="button" class="addbtn"><span>Delete question</span></button></a>-->
 
   <form>
     <h2 id="answers">Answers:</h2>

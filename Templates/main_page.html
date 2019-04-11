@@ -10,9 +10,16 @@
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <div class="head">
         <h1>ASK MATE V1 <i class="fas fa-cloud"></i></h1>
+        {% if session['username'] %}
+        <h4>Hi {{session['username']}}!</h4>
+        <form action="/logout">
+            <button type="submit">Log out</button>
+        </form>
+        {% else %}
         <form action="/login">
             <h4 id="login_info">Not logged in? <button type="submit" class="addbtn"><span>Click here</span></button></h4>
         </form>
+        {% endif %}
     </div>
 <!--<select name="order_by" form="sort-question-form">-->
     <!--<option value="title">Title</option>-->
