@@ -1,7 +1,7 @@
 import os
 import psycopg2
 import psycopg2.extras
-import urllib
+
 
 
 def get_connection_string():
@@ -9,7 +9,7 @@ def get_connection_string():
     password = os.environ.get('PASSWORD')
     host = os.environ.get('HOST')
     database_name = os.environ.get('DB_NAME')
-    password = urllib.parse.quote(password)
+
 
     env_variables_defined = user_name and password and host and database_name
 

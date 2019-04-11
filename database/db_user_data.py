@@ -1,6 +1,5 @@
 from database.db_connection import db_connection
 
-
 @db_connection.connection_handler
 def add_user(cursor, username, password):
     cursor.execute("INSERT INTO user_data (registration_time, username, password) VALUES (CURRENT_TIMESTAMP, %(username)s, %(password)s)", ({
@@ -14,5 +13,3 @@ def get_username_and_password(cursor):
     dejta = cursor.fetchall()
     return dejta
 
-add_user(username="KubLom", password="Rafau")
-print(get_username_and_password())

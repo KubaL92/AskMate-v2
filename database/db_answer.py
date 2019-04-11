@@ -20,10 +20,6 @@ def insert_answer_to_database(cursor, message, question_id, vote_number, image):
                               'message': message,
                               'image': image,
                               'question_id': question_id}))
-    #
-    # question_id = cursor.fetchone()
-    # return int(question_id['question_id'])
-
 
 @db_connection.connection_handler
 def delete_answer(cursor, answer_id):

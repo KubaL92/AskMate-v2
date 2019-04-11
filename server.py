@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, session, abort
 import data_manager
 
 
@@ -75,38 +75,12 @@ def downvote_answer(question_id, id):
 def delete_question(id):
     data_manager.delete_question_from_db(id)
     return redirect('/')
-
-
+#
+# @app.route("/login")
+# def login_handler():
+#
 
 """
-@app.route('/add_answer/<id>')
-def ans_site(id):
-    return render_template('add_answer.html', id=id)
-
-@app.route('/delete_question')
-def delete_question_site():
-    return render_template('delete_question.html')
-
-# @app.route('/delete_question', methods=['POST'])
-#     def delete_question(id):
-
-
-
-@app.route('/question/<id_>/new-answer', methods=['POST'])
-def add_new_answer(id_):
-    id_ = int(id_)
-    question = connection.display_question('sample_data/question.csv', id_)
-    answers = data_manager.give_specific_answers(id_, connection.csv_to_list('sample_data/answer.csv'))
-    generated_id = data_manager.generate_question_id('sample_data/answer.csv')
-    answer_text = request.form["new_answer"]
-    #TODO ->  zapisywanie do pliku 'answers'
-
-@app.route('/add_answer/<id>', methods=['POST'])
-def dodaj_odp_do_pliku(id):
-    new_answer = data_manager.get_answer_to_dict(id)
-    connection.add_answer_to_file(new_answer)
-    return redirect('/question/%s' % id)
-
 @app.route("/list", methods=['GET'])
 def order_question():
     user_questions = connection.csv_to_list('sample_data/question.csv')
