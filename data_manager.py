@@ -54,8 +54,8 @@ def downvote_answer(id):
 ###### HERE COMES USERS VERIFICATION PART ######
 
 def hashing_parole(password):
-    hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
-    return hashed_password
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    return hashed_password.decode('utf-8')
 
 
 def id_generator(size=7, chars=string.ascii_uppercase + string.digits):
@@ -77,6 +77,8 @@ def check_id_uniqueness():
 
 
 def processing_registration_data(username, hashed_password):
+    user_id = db_user.add_to_db(username, hashed_password)
+    return user_id
     user_id = check_id_uniqueness()
     return db_user.add_to_db(username, hashed_password, user_id)
 
