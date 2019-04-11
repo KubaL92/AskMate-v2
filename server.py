@@ -26,7 +26,7 @@ def validate_login_data():
     return redirect(url_for('route_index'))
 
 @app.route('/registration')
-def registration_form():
+def registration_page():
     return render_template('registration.html')
 
 
