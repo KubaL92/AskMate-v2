@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block title %}Login{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+<h2>LOGIN</h2>
+<form action="/" method="post">
+  <label for="username">User Name:</label>
+  <input id="username" name="log_usrname" type="text" required minlength="3" maxlength="10" />
+    <br>
+  <label for="password">Password:</label>
+  <input id="password" name="log_pswrd" type="password" required minlength="3" maxlength="10" />
+    <br>
+  <button type="submit">Log In</button>
+</form>
+<h3>You don't have account? <a href="/registration">Register here</a></h3>
+<a href="/"><button type="button">Main Page</button></a>
+
+{% endblock %}

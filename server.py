@@ -12,6 +12,32 @@ def route_index():
     return render_template('main_page.html', user_questions=user_questions)
 
 
+@app.route('/login')
+def login_page():
+
+    return render_template('login.html')
+
+
+@app.route('/login', methods=['POST'])
+def validate_login_data():
+    user_name = request.form['log_usrname']
+    password = request.form['log_pswrd']
+    hashed_password = data_manager.hashing_parole(password)
+    return redirect(url_for('route_index'))
+
+@app.route('/registration')
+def registration_page():
+    return render_template('registration.html')
+
+
+@app.route('/registration', methods=['POST'])
+def add_user_to_database():
+    user_name = request.form('reg_usrname')
+    password = request.form('reg_pswrd')
+    hashed_password = data_manager.hashing_parole(password)
+    usr_id = data_manager.processing_registration_data()
+    return redirect('route_index', user_id=usr_id)
+
 @app.route('/add_question')
 def route_add_question():
     return render_template('add_question.html')

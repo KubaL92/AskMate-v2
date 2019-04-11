@@ -17,8 +17,14 @@ h1 {
     margin: 15px 25px;
 }
 
+
+#login_info {
+    float: right;
+}
+
+
 .addbtn {
-    position: absolute;
+    position: relative;
     right: 0;
     display: inline-block;
     border-radius: 4px;
@@ -68,7 +74,7 @@ a:link {
 }
 
 .a li {
-    margin-top: 30px;
+    margin-top: 40px;
     text-align: center;
 }
 
