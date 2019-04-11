@@ -5,7 +5,7 @@ import data_manager
 app = Flask(__name__, template_folder='Templates')
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def route_index():
     user_questions = data_manager.get_questions()
 
@@ -18,10 +18,10 @@ def login_page():
     return render_template('login.html')
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def validate_login_data():
-    user_name = request.form['log_usrname']
-    password = request.form['log_pswrd']
+    user_name = request.form['logusrname']
+    password = request.form['logpswrd']
     hashed_password = data_manager.hashing_parole(password)
     return redirect(url_for('route_index'))
 
@@ -30,13 +30,13 @@ def registration_page():
     return render_template('registration.html')
 
 
-@app.route('/registration', methods=['POST'])
+@app.route('/registration', methods=['GET', 'POST'])
 def add_user_to_database():
-    user_name = request.form('reg_usrname')
-    password = request.form('reg_pswrd')
+    user_name = request.form['regusrname']
+    password = request.form['regpswrd']
     hashed_password = data_manager.hashing_parole(password)
-    usr_id = data_manager.processing_registration_data()
-    return redirect('route_index', user_id=usr_id)
+    usr_id = data_manager.processing_registration_data(user_name, hashed_password)
+    return redirect('route_index', usr_id=usr_id)
 
 @app.route('/add_question')
 def route_add_question():

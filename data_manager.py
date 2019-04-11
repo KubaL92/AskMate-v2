@@ -137,9 +137,10 @@ def downvote_answer(id):
 ###### HERE COMES USERS VERIFICATION PART ######
 
 def hashing_parole(password):
-    hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
-    return hashed_password
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    return hashed_password.decode('utf-8')
 
 
 def processing_registration_data(username, hashed_password):
-    return db_user.add_to_db(username, hashed_password)
+    user_id = db_user.add_to_db(username, hashed_password)
+    return user_id
