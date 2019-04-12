@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, session, abort, flash
+from flask import Flask, render_template, request, url_for, redirect, session, flash
 import data_manager
 
 
@@ -53,7 +53,7 @@ def add_user_to_database():
     password = request.form['regpswrd']
     hashed_password = data_manager.hashing_parole(password)
     usr_id = data_manager.processing_registration_data(user_name, hashed_password)
-    return redirect('route_index', usr_id=usr_id)
+    return redirect(url_for('route_index', usr_id=usr_id))
 
 @app.route('/add_question')
 def route_add_question():
